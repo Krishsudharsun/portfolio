@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Search, Network, Radio, Cpu, Bug, Terminal as TerminalIcon } from 'lucide-react';
 import { securityMindset } from '../data/content';
 import { SectionHeading } from './SectionHeading';
+import { DecryptText } from './DecryptText';
 
 const pillarIcons = [Search, Network, Radio, Cpu, Bug, TerminalIcon];
 
@@ -26,7 +27,7 @@ export function SecurityMindset() {
             style={{ borderColor: 'var(--nl-border)', color: 'var(--nl-ink-faint)' }}
           >
             <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'var(--nl-accent-3)' }} aria-hidden="true" />
-            watch-console — live disciplines
+            <DecryptText text="watch-console — live disciplines" trigger="inView" charDelayMs={14} frameMs={24} />
           </div>
 
           <div className="grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-3" style={{ borderColor: 'var(--nl-border)' }}>
@@ -45,7 +46,7 @@ export function SecurityMindset() {
                   <div className="flex items-center gap-2.5">
                     <Icon size={16} style={{ color: 'var(--nl-accent)' }} aria-hidden="true" />
                     <h3 className="font-mono text-sm uppercase tracking-wide" style={{ color: 'var(--nl-ink)' }}>
-                      {pillar.label}
+                      <DecryptText text={pillar.label} trigger="inView" startDelayMs={i * 90} charDelayMs={20} />
                     </h3>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--nl-ink-dim)' }}>

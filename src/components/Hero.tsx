@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, Link, Briefcase, FileText, Mail } from 'lucide-react';
 import { profile } from '../data/content';
 import { WardSeal } from './WardSeal';
+import { DecryptText } from './DecryptText';
 import { useEasterEggs } from '../context/EasterEggContext';
 
 const headlineWords = profile.tagline.split(' ');
@@ -53,11 +54,11 @@ export function Hero() {
                 key={word + i}
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.1 + i * 0.12 }}
+                transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.1 + i * 0.12 }}
                 className="mr-4 inline-block"
                 style={{ color: i % 2 === 1 ? 'var(--nl-accent)' : 'var(--nl-ink)' }}
               >
-                {word}
+                <DecryptText text={word} trigger="mount" startDelayMs={300 + i * 160} charDelayMs={22} />
               </motion.span>
             ))}
           </h1>

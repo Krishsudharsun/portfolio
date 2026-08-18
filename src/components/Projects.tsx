@@ -3,6 +3,7 @@ import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Plus, FolderGit2 } from 'lucide-react';
 import { projects } from '../data/content';
 import { SectionHeading } from './SectionHeading';
+import { DecryptText } from './DecryptText';
 
 export function Projects() {
   const reduceMotion = useReducedMotion();
@@ -43,7 +44,7 @@ export function Projects() {
                 </div>
 
                 <h3 className="font-display mt-4 text-2xl" style={{ color: 'var(--nl-ink)' }}>
-                  {project.title}
+                  <DecryptText text={project.title} trigger="hover" charDelayMs={16} frameMs={26} />
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--nl-ink-dim)' }}>
                   {project.summary}
