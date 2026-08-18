@@ -1,48 +1,59 @@
-import { motion } from "framer-motion";
-import { cyberFocus } from "../data/portfolio";
+import { motion, useReducedMotion } from 'framer-motion';
+import { Search, Network, Radio, Cpu, Bug, Terminal as TerminalIcon } from 'lucide-react';
+import { securityMindset } from '../data/content';
+import { SectionHeading } from './SectionHeading';
 
-export default function SecurityMindset() {
+const pillarIcons = [Search, Network, Radio, Cpu, Bug, TerminalIcon];
+
+export function SecurityMindset() {
+  const reduceMotion = useReducedMotion();
   return (
-    <section className="py-28 md:py-36 relative overflow-hidden">
+    <section id="security" className="relative py-24 sm:py-32">
       <div
-        className="absolute inset-0 -z-10 opacity-60"
-        style={{
-          background:
-            "radial-gradient(700px 400px at 50% 0%, color-mix(in srgb, var(--emerald) 8%, transparent), transparent)",
-        }}
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full"
+        style={{ background: 'linear-gradient(180deg, var(--nl-bg-soft), transparent 60%)' }}
+        aria-hidden="true"
       />
-      <div className="container-page">
-        <div className="max-w-2xl mb-14">
-          <p className="eyebrow mb-4">Focus</p>
-          <h2 className="font-display text-3xl md:text-4xl text-ink text-balance">Security Mindset</h2>
-          <p className="text-ink-soft mt-4 leading-relaxed">
-            Cybersecurity isn't a section here — it's the lens the rest of the work is built through.
-          </p>
-        </div>
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeading eyebrow="Mindset" title={securityMindset.title} description={securityMindset.intro} />
 
-        <div className="rounded-2xl border border-line glass-panel rune-border p-6 md:p-10">
-          <div className="flex items-center justify-between mb-8 font-mono text-xs uppercase tracking-wide text-ink-faint">
-            <span>console — sec.monitor</span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse" />
-              live focus
-            </span>
+        <div
+          className="mt-14 overflow-hidden rounded-xl border"
+          style={{ borderColor: 'var(--nl-border-strong)', background: 'var(--nl-bg-soft)' }}
+        >
+          <div
+            className="font-mono flex items-center gap-2 border-b px-5 py-3 text-xs"
+            style={{ borderColor: 'var(--nl-border)', color: 'var(--nl-ink-faint)' }}
+          >
+            <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'var(--nl-accent-3)' }} aria-hidden="true" />
+            watch-console — live disciplines
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {cyberFocus.map((item, i) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="rounded-lg border border-line bg-panel-raised/60 p-4 flex items-center gap-3"
-              >
-                <span className="font-mono text-[0.65rem] text-accent">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-sm text-ink">{item.label}</span>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-3" style={{ borderColor: 'var(--nl-border)' }}>
+            {securityMindset.pillars.map((pillar, i) => {
+              const Icon = pillarIcons[i % pillarIcons.length];
+              return (
+                <motion.div
+                  key={pillar.label}
+                  initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.45, delay: i * 0.06 }}
+                  className="p-5"
+                  style={{ borderColor: 'var(--nl-border)' }}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Icon size={16} style={{ color: 'var(--nl-accent)' }} aria-hidden="true" />
+                    <h3 className="font-mono text-sm uppercase tracking-wide" style={{ color: 'var(--nl-ink)' }}>
+                      {pillar.label}
+                    </h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--nl-ink-dim)' }}>
+                    {pillar.detail}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

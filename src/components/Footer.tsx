@@ -1,18 +1,39 @@
-import { profile } from "../data/portfolio";
-import RuneCircle from "./RuneCircle";
+import { Link, Briefcase, Mail } from 'lucide-react';
+import { profile } from '../data/content';
+import { WardSeal } from './WardSeal';
 
-export default function Footer() {
+export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-line py-10 overflow-hidden">
-      <div className="absolute -right-16 -top-16 opacity-[0.06] pointer-events-none" aria-hidden="true">
-        <RuneCircle size={220} spin={false} />
-      </div>
-      <div className="container-page flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink-faint font-mono relative">
-        <p>© {year} {profile.name}. Built with intent.</p>
-        <p className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald" />
-          Try typing <span className="text-accent">REVELIO</span> anywhere on this page
+    <footer className="border-t" style={{ borderColor: 'var(--nl-border)' }}>
+      <p className="font-mono py-3 text-center text-[10px] tracking-wide" style={{ color: 'var(--nl-ink-faint)' }}>
+        psst — try typing <span style={{ color: 'var(--nl-accent)' }}>NOX</span>,{' '}
+        <span style={{ color: 'var(--nl-accent)' }}>LUMOS</span>,{' '}
+        <span style={{ color: 'var(--nl-accent)' }}>REVELIO</span>, or{' '}
+        <span style={{ color: 'var(--nl-accent)' }}>ACCIO PROJECTS</span> anywhere on this page
+      </p>
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 border-t px-5 py-10 sm:flex-row sm:justify-between sm:px-8" style={{ borderColor: 'var(--nl-border)' }}>
+        <div className="flex items-center gap-2.5">
+          <WardSeal size={22} animated={false} />
+          <span className="font-mono text-xs" style={{ color: 'var(--nl-ink-faint)' }}>
+            © {year} {profile.name}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub" style={{ color: 'var(--nl-ink-faint)' }}>
+            <Link size={17} />
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" style={{ color: 'var(--nl-ink-faint)' }}>
+            <Briefcase size={17} />
+          </a>
+          <a href={`mailto:${profile.email}`} aria-label="Email" style={{ color: 'var(--nl-ink-faint)' }}>
+            <Mail size={17} />
+          </a>
+        </div>
+
+        <p className="font-mono text-[11px]" style={{ color: 'var(--nl-ink-faint)' }}>
+          Built with React · TypeScript · Vite · Tailwind
         </p>
       </div>
     </footer>

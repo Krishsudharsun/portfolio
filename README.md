@@ -1,37 +1,34 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# Krishsudharsun L — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A cybersecurity × wizarding-aesthetic developer portfolio, built with React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-=======
-# portfolio
-Personal Portfolio showcasing web dev, OSINT, digital marketing.
->>>>>>> cd4dd7c4e4bc90dae356b5400f0b7ac9856a3912
+Open the printed local URL (usually http://localhost:5173).
+
+## Build for production
+
+```bash
+npm run build
+```
+
+Output goes to `dist/`. Preview it with `npm run preview`.
+
+## Structure
+
+- `src/data/content.ts` — the single source of truth for every fact on the site (resume-sourced). Edit this file to update text content; everything else reads from here.
+- `src/context/ThemeContext.tsx` — NOX (dark) / LUMOS (light) theme, persisted to `localStorage`, respects system preference until you choose explicitly.
+- `src/context/EasterEggContext.tsx` — the typed-command easter eggs (`LUMOS`, `NOX`, `ACCIO PROJECTS`, `REVELIO`) and the optional terminal.
+- `src/components/` — one file per section (Hero, About, Experience, Skills, Projects, SecurityMindset, Education, Contact, Footer) plus shared pieces (`Navbar`, `SectionHeading`, `WardSeal`, `Terminal`).
+- `src/components/WardSeal.tsx` — the site's signature glyph, a rune-dial built from a network graph. Reused at full size in the Hero and small elsewhere.
+
+## Notes
+
+- No fake stats, invented projects, or made-up dates — anything not in the resume renders as "Details coming soon" instead of being fabricated (see `content.ts`).
+- The contact form opens the visitor's email client with the message pre-filled; it does not send email from a backend (none is configured).
+- Resume link renders a "coming soon" state until you set `profile.resumeUrl` in `content.ts`.

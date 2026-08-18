@@ -1,46 +1,72 @@
-import { motion } from "framer-motion";
-import { skillGroups } from "../data/portfolio";
+import { motion, useReducedMotion } from 'framer-motion';
+import { Radar, ShieldHalf, Code2, Database, type LucideIcon } from 'lucide-react';
+import { skillGroups } from '../data/content';
+import { SectionHeading } from './SectionHeading';
 
-export default function Skills() {
+const icons: Record<string, LucideIcon> = {
+  reconnaissance: Radar,
+  security: ShieldHalf,
+  development: Code2,
+  'backend-data': Database,
+};
+
+export function Skills() {
+  const reduceMotion = useReducedMotion();
   return (
-    <section id="skills" className="py-28 md:py-36">
-      <div className="container-page">
-        <div className="max-w-2xl mb-14">
-          <p className="eyebrow mb-4">Skills</p>
-          <h2 className="font-display text-3xl md:text-4xl text-ink text-balance">
-            Arsenal of Spells &amp; Systems
-          </h2>
-          <p className="text-ink-soft mt-4 leading-relaxed">
-            Grouped by function rather than ranked by number — each domain is a working focus, not a score.
-          </p>
-        </div>
+    <section id="skills" className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeading
+          eyebrow="Skills"
+          title="Arsenal of Spells & Systems"
+          description="Tools and disciplines grouped by what they're for, not ranked by invented percentages."
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {skillGroups.map((group, i) => (
-            <motion.div
-              key={group.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative rounded-xl border border-line glass-panel p-6 hover:border-accent/50 transition-colors duration-300"
-            >
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="font-display text-lg text-ink">{group.title}</h3>
-                <span className="font-mono text-[0.65rem] text-ink-faint group-hover:text-accent transition-colors">
-                  {group.codename}
-                </span>
-              </div>
-              <ul className="space-y-2.5">
-                {group.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2.5 text-sm text-ink-soft">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {skillGroups.map((group, i) => {
+            const Icon = icons[group.id] ?? Code2;
+            return (
+              <motion.div
+                key={group.id}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="rounded-xl border p-6"
+                style={{ borderColor: 'var(--nl-border)', background: 'var(--nl-surface)' }}
+              >
+                <div className="flex items-start justify-between">
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: 'var(--nl-surface-2)', color: 'var(--nl-accent)' }}
+                  >
+                    <Icon size={19} aria-hidden="true" />
+                  </div>
+                  <span
+                    className="font-mono rounded-full border px-2.5 py-1 text-[10px] uppercase tracking-wider"
+                    style={{ borderColor: 'var(--nl-border-strong)', color: 'var(--nl-ink-faint)' }}
+                  >
+                    {group.focus}
+                  </span>
+                </div>
+
+                <h3 className="font-display mt-4 text-2xl" style={{ color: 'var(--nl-ink)' }}>
+                  {group.title}
+                </h3>
+
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <li
+                      key={skill}
+                      className="font-mono rounded-md border px-2.5 py-1.5 text-xs"
+                      style={{ borderColor: 'var(--nl-border)', color: 'var(--nl-ink-dim)' }}
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

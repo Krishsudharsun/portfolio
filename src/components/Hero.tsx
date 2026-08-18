@@ -1,112 +1,177 @@
-import { motion } from "framer-motion";
-import { FileText, ArrowDown } from "lucide-react";
-import { profile } from "../data/portfolio";
-import RuneCircle from "./RuneCircle";
-import { GithubIcon, LinkedinIcon } from "./icons/BrandIcons";
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowDown, Link, Briefcase, FileText, Mail } from 'lucide-react';
+import { profile } from '../data/content';
+import { WardSeal } from './WardSeal';
+import { useEasterEggs } from '../context/EasterEggContext';
 
-export default function Hero() {
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+const headlineWords = profile.tagline.split(' ');
+
+export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const { revelioActive } = useEasterEggs();
+
+  function scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
-      {/* Ambient background layer */}
-      <div className="absolute inset-0 -z-10">
+    <section id="hero" className="relative flex min-h-[100svh] items-center overflow-hidden pt-20">
+      {/* ambient backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div
-          className="absolute inset-0"
+          className="absolute left-1/2 top-1/2 h-[140vmin] w-[140vmin] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
           style={{
-            background:
-              "radial-gradient(1200px 600px at 80% -10%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent), radial-gradient(900px 500px at 10% 110%, color-mix(in srgb, var(--accent) 12%, transparent), transparent)",
+            background: 'radial-gradient(circle, var(--nl-surface-2) 0%, transparent 62%)',
           }}
         />
-        <svg className="absolute inset-0 w-full h-full opacity-[0.08]" aria-hidden="true">
+        <svg className="absolute inset-0 h-full w-full opacity-[0.07]" aria-hidden="true">
           <defs>
             <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-              <path d="M42 0H0V42" fill="none" stroke="var(--ink)" strokeWidth="0.5" />
+              <path d="M 42 0 L 0 0 0 42" fill="none" stroke="var(--nl-ink)" strokeWidth="0.6" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
       </div>
 
-      <div className="container-page grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <p className="eyebrow mb-5">Computer Science Engineer · Dev + Security</p>
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+        <div>
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="font-mono mb-5 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs uppercase tracking-[0.16em]"
+            style={{ borderColor: 'var(--nl-border-strong)', color: 'var(--nl-accent-3)' }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--nl-accent-3)' }} aria-hidden="true" />
+            {profile.role}
+          </motion.p>
 
-          <h1 className="font-display text-[2.6rem] leading-[1.08] sm:text-6xl md:text-[3.6rem] font-medium text-ink text-balance">
-            I Build. <span className="text-gradient italic">I Secure.</span> I Investigate.
+          <h1 className="font-display text-balance text-5xl leading-[1.05] sm:text-6xl md:text-7xl">
+            {headlineWords.map((word, i) => (
+              <motion.span
+                key={word + i}
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.1 + i * 0.12 }}
+                className="mr-4 inline-block"
+                style={{ color: i % 2 === 1 ? 'var(--nl-accent)' : 'var(--nl-ink)' }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </h1>
 
-          <p className="mt-6 max-w-xl text-ink-soft text-base md:text-lg leading-relaxed">
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-6 max-w-xl text-lg leading-relaxed sm:text-xl"
+            style={{ color: 'var(--nl-ink-dim)' }}
+          >
             {profile.subheading}
-          </p>
+          </motion.p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75 }}
+            className="mt-9 flex flex-wrap items-center gap-3"
+          >
             <button
-              onClick={() => scrollTo("projects")}
-              className="px-6 py-3 rounded-md bg-accent text-void font-mono text-sm uppercase tracking-wide font-medium hover:opacity-90 transition-opacity"
-              style={{ color: "var(--bg-void)", boxShadow: "var(--glow-cyan)" }}
+              type="button"
+              onClick={() => scrollTo('projects')}
+              className="rounded-md px-5 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5"
+              style={{ background: 'var(--nl-accent)', color: 'var(--nl-bg)' }}
             >
               Explore My Work
             </button>
             <button
-              onClick={() => scrollTo("contact")}
-              className="px-6 py-3 rounded-md border border-line-bright text-ink font-mono text-sm uppercase tracking-wide hover:border-accent hover:text-accent transition-colors"
+              type="button"
+              onClick={() => scrollTo('contact')}
+              className="rounded-md border px-5 py-3 text-sm font-medium transition-colors hover:border-current"
+              style={{ borderColor: 'var(--nl-border-strong)', color: 'var(--nl-ink)' }}
             >
               Contact Me
             </button>
-          </div>
+          </motion.div>
 
-          <div className="mt-8 flex items-center gap-5 text-ink-soft">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-8 flex flex-wrap items-center gap-5 text-sm"
+            style={{ color: 'var(--nl-ink-dim)' }}
+          >
             <a
               href={profile.github}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 hover:text-accent transition-colors text-sm"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-current"
             >
-              <GithubIcon size={17} /> GitHub
+              <Link size={16} aria-hidden="true" /> GitHub
             </a>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 hover:text-accent transition-colors text-sm"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-current"
             >
-              <LinkedinIcon size={17} /> LinkedIn
+              <Briefcase size={16} aria-hidden="true" /> LinkedIn
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-current"
+            >
+              <Mail size={16} aria-hidden="true" /> Email
             </a>
             {profile.resumeUrl ? (
-              <a href={profile.resumeUrl} className="flex items-center gap-2 hover:text-accent transition-colors text-sm">
-                <FileText size={17} /> Resume
+              <a href={profile.resumeUrl} className="inline-flex items-center gap-1.5 transition-colors hover:text-current">
+                <FileText size={16} aria-hidden="true" /> Resume
               </a>
             ) : (
-              <span className="flex items-center gap-2 text-ink-faint text-sm cursor-default" title="Resume link coming soon">
-                <FileText size={17} /> Resume soon
+              <span className="inline-flex items-center gap-1.5 opacity-50" title="Resume link coming soon">
+                <FileText size={16} aria-hidden="true" /> Resume — coming soon
               </span>
             )}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
-          className="hidden md:flex justify-center"
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="relative mx-auto hidden aspect-square w-full max-w-md items-center justify-center sm:flex"
         >
-          <RuneCircle size={440} />
+          <WardSeal size={440} pulse className="max-w-full" />
+          <div
+            className="hidden-ink font-mono absolute bottom-2 right-2 rounded border px-2.5 py-1 text-[10px]"
+            style={{ borderColor: 'var(--nl-border-strong)', color: 'var(--nl-accent-3)', background: 'var(--nl-bg-soft)' }}
+          >
+            seal.integrity: verified
+          </div>
         </motion.div>
       </div>
 
       <button
-        onClick={() => scrollTo("about")}
-        aria-label="Scroll to About"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-ink-faint hover:text-accent transition-colors animate-bounce"
-        style={{ animationDuration: "2.4s" }}
+        type="button"
+        onClick={() => scrollTo('about')}
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest sm:flex"
+        style={{ color: 'var(--nl-ink-faint)' }}
+        aria-label="Scroll to About section"
       >
-        <ArrowDown size={20} />
+        scroll
+        <ArrowDown size={14} className={reduceMotion ? '' : 'animate-bounce'} aria-hidden="true" />
       </button>
+
+      {revelioActive && (
+        <p
+          className="font-mono absolute left-5 top-24 max-w-[220px] text-[11px] leading-relaxed sm:left-8"
+          style={{ color: 'var(--nl-ink-faint)' }}
+        >
+          revelio: this seal is a network graph in disguise — 8 ports, 4 hubs, one cursor.
+        </p>
+      )}
     </section>
   );
 }
