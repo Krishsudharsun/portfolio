@@ -1280,7 +1280,7 @@ function Footer({ isDark }: { isDark: boolean }) {
         ARCANE SECURITY SYSTEM — KRISHSUDHARSUN
       </div>
       <div className="font-mono text-[8px] tracking-wider opacity-35" style={{ fontFamily: F_MONO, color: isDark ? "#8b8ca8" : "#6b5a3e" }}>
-        UPFINITY © 2025 — BUILT WITH CODE & CRAFT
+        <a href="https://upfinity.netlify.app">UPFINITY</a> © 2025 — BUILT WITH CODE & CRAFT
       </div>
     </footer>
   );
