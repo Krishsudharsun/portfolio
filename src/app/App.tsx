@@ -631,7 +631,7 @@ function AboutSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="about" className="py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 01" title="THE WIZARD BEHIND THE CODE" isDark={isDark} />
+        <SectionHeader eyebrow="" title="THE WIZARD BEHIND THE CODE" isDark={isDark} />
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <Reveal>
 
@@ -710,7 +710,7 @@ function ExperienceSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="experience" className="py-28 px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 02" title="CHRONICLES & MISSIONS" subtitle="A record of operations, roles and endeavours across the UPFINITY command structure." isDark={isDark} />
+        <SectionHeader eyebrow="" title="CHRONICLES & MISSIONS" subtitle="A record of operations, roles and endeavours across the UPFINITY command structure." isDark={isDark} />
         <div className="relative">
           <div className="absolute left-6 md:left-7 top-0 bottom-0 w-px" style={{ background: isDark ? "rgba(201,168,76,0.2)" : "rgba(139,38,53,0.15)" }} />
           <div className="space-y-9">
@@ -803,7 +803,7 @@ function SkillsSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="skills" className="py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 03" title="SECURITY MINDSET" subtitle="Arcane Security Council — active modules across recon, security, development and data." isDark={isDark} />
+        <SectionHeader eyebrow="" title="SECURITY MINDSET" subtitle="Arcane Security Council — active modules across recon, security, development and data." isDark={isDark} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-24">
           {SKILL_CATS.map(cat => {
             const Icon = cat.icon;
@@ -1044,7 +1044,7 @@ function ProjectsSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="projects" className="py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 04" title="MISSION ARCHIVES" subtitle="Classified dossiers — hover to open each enchanted book and reveal the full case file." isDark={isDark} />
+        <SectionHeader eyebrow="" title="MISSION ARCHIVES" subtitle="Classified dossiers — hover to open each enchanted book and reveal the full case file." isDark={isDark} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROJECTS_DATA.map((proj, i) => (
             <Reveal key={i} delay={i * 0.07}>
@@ -1066,7 +1066,7 @@ function EducationSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="education" className="py-28 px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 05" title="ACADEMIA OF CODE" isDark={isDark} />
+        <SectionHeader eyebrow="" title="ACADEMIA OF CODE" isDark={isDark} />
 
         <Reveal>
           <div className="rounded p-8 mb-8" style={{ background: cardBg, border: `1px solid ${bdr}`, backdropFilter: "blur(8px)" }}>
@@ -1135,7 +1135,7 @@ function ContactSection({ isDark }: { isDark: boolean }) {
   return (
     <section id="contact" className="py-28 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeader eyebrow="// SECTION 06" title="SEND AN OWL" subtitle="Secure Channel — encrypted transmission active on all frequencies." isDark={isDark} />
+        <SectionHeader eyebrow="" title="SEND AN OWL" subtitle="Secure Channel — encrypted transmission active on all frequencies." isDark={isDark} />
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left */}
           <Reveal>

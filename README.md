@@ -1,7 +1,7 @@
 
-  # Cinematic Cybersecurity Portfolio
+  # Krishsudharsun-Portfolio
 
-  This is a code bundle for Cinematic Cybersecurity Portfolio. The original project is available at https://www.figma.com/design/rChWfjpTojtCchVyyu8je8/Cinematic-Cybersecurity-Portfolio.
+  This is a code bundle for personal Portfolio.
 
   ## Running the code
 
